@@ -8,15 +8,15 @@
              mc:Ignorable="d"
              x:Class="CalendarTest.Views.SchedulePage">
     <ContentPage.Content>
-        <xForms:SfSchedule FirstDayOfWeek="2" ScheduleView="DayView" DataSource="{Binding AppointmentCollection}" TimeInterval="30" DayViewSettings="{Binding DayViewSettings}" ShowCurrentTimeIndicator="True">
-            <xForms:SfSchedule.SelectionStyle>
-                <xForms:SelectionStyle 
-                    BackgroundColor="Blue" 
-                    BorderColor="Black"
-                    BorderThickness="5"
-                    BorderCornerRadius="5">
-                </xForms:SelectionStyle>
-            </xForms:SfSchedule.SelectionStyle>
+        <xForms:SfSchedule x:Name="schedule" FirstDayOfWeek="2" ScheduleView="DayView" DataSource="{Binding AppointmentCollection}" TimeInterval="30" DayViewSettings="{Binding DayViewSettings}" ShowCurrentTimeIndicator="True">
+            <xForms:SfSchedule.AppointmentMapping>
+                <xForms:ScheduleAppointmentMapping
+                    SubjectMapping="EventName" 
+                    ColorMapping="Color"
+                    StartTimeMapping="From"
+                    EndTimeMapping="To">
+                </xForms:ScheduleAppointmentMapping>
+            </xForms:SfSchedule.AppointmentMapping>
         </xForms:SfSchedule>
     </ContentPage.Content>
     <ContentPage.BindingContext>
