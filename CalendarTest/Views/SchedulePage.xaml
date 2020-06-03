@@ -29,18 +29,14 @@
                            DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.AppointmentViewModels}"
                            TimeInterval="30" 
                            ShowCurrentTimeIndicator="True"
-                           AppointmentTemplate="{Binding AppointmentTemplate}">
+                           AppointmentTemplate="{Binding AppointmentTemplate}"> <!-- Remove this line and the colors will work. But Clicked event won't -->
             <xForms:SfSchedule.BindingContext>
                 <views:MyAppointmentDataTemplate>
                     <views:MyAppointmentDataTemplate.AppointmentTemplate> 
                         <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
                             <!-- Content for each appointment-->
-                            <Button Text="{Binding EventName}">
-                                <Button.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped">
-
-                                    </TapGestureRecognizer>
-                                </Button.GestureRecognizers>
+                            <Button Text="{Binding EventName}"
+                                    Clicked="TapGestureRecognizer_OnTapped">
                             </Button>
                         </DataTemplate>
                     </views:MyAppointmentDataTemplate.AppointmentTemplate>

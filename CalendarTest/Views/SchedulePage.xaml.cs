@@ -16,7 +16,7 @@ namespace CalendarTest.Views
         public SchedulePage()
         {
             InitializeComponent();
-            SfSchedule.Locale = CultureInfo.CurrentCulture.ThreeLetterISOLanguageName;
+            SfSchedule.Locale = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         }
 
         private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
