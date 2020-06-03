@@ -22,13 +22,16 @@ namespace CalendarTest.ViewModels
 
         public DayViewSettings DayViewSettings { get; set; }
 
+        public ObservableCollection<AppointmentViewModel> AppointmentCollection { get; set; }
+
         public ScheduleViewModel()
         {
             SetDayLabelFormatToMinutes();
             //AppointmentCollection = new ObservableCollection<Meeting>();
             //DoStuff();
             //doStuff2();
-            AppointmentCollection = ProvideMeetingViewModels(ProvideMeetings());
+            AppointmentCollection = ProvideAppointmentViewModels(ProvideAppointments());
+            //ProvideMeetingViewModels(ProvideMeetings());
             //AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
             //OnPropertyChanged(nameof(AppointmentViewModels));
         }
@@ -91,14 +94,14 @@ namespace CalendarTest.ViewModels
         private Color GetRandomColor()
         {
             var rnd = new Random();
-            return new Color(10,24,60);//System.Drawing.Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            return Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));//System.Drawing.Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
         }
 
         ScheduleAppointmentCollection scheduleAppointmentCollection = new ScheduleAppointmentCollection();
         //ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();  
         
 
-        public ObservableCollection<MeetingViewModel> AppointmentCollection { get; set; }
+
 
         //private void DoStuff()
         //{
