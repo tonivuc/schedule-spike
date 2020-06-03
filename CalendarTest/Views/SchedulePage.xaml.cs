@@ -19,7 +19,7 @@ namespace CalendarTest.Views
             SfSchedule.Locale = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
         }
 
-        private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        private void Button_OnClicked(object sender, EventArgs e)
         {
             App.Current.MainPage.DisplayAlert("Alert", "Alert alert code red!","No worries!");
         }

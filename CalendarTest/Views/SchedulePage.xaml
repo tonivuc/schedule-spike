@@ -9,18 +9,10 @@
              mc:Ignorable="d"
              x:Class="CalendarTest.Views.SchedulePage"
              x:Name="contentPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <views:MyAppointmentDataTemplate x:Key="MyAppointmentDataTemplate">
-                <views:MyAppointmentDataTemplate.AppointmentTemplate> 
-                    <DataTemplate>
-                        <Label Text="Cake is lie"></Label>
-                    </DataTemplate>
-                </views:MyAppointmentDataTemplate.AppointmentTemplate>
-            </views:MyAppointmentDataTemplate>
-        </ResourceDictionary>
 
-    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModels:ScheduleViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <!-- The DataSource comes from a different place than the DataTemplate used by the rest of the SfSchedule -->
         <xForms:SfSchedule x:Name="SfSchedule" 
@@ -36,7 +28,8 @@
                         <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
                             <!-- Content for each appointment-->
                             <Button Text="{Binding EventName}"
-                                    Clicked="TapGestureRecognizer_OnTapped">
+                                    BackgroundColor="{Binding Color}"
+                                    Clicked="Button_OnClicked">
                             </Button>
                         </DataTemplate>
                     </views:MyAppointmentDataTemplate.AppointmentTemplate>
@@ -44,15 +37,10 @@
             </xForms:SfSchedule.BindingContext>
             <xForms:SfSchedule.AppointmentMapping>
                 <xForms:ScheduleAppointmentMapping
-                    SubjectMapping="EventName" 
-                    ColorMapping="Color"
                     StartTimeMapping="From"
                     EndTimeMapping="To">
                 </xForms:ScheduleAppointmentMapping>
             </xForms:SfSchedule.AppointmentMapping>
         </xForms:SfSchedule>
     </ContentPage.Content>
-    <ContentPage.BindingContext>
-        <viewModels:ScheduleViewModel />
-    </ContentPage.BindingContext>
 </ContentPage>
