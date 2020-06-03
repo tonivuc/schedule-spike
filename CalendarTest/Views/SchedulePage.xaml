@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              x:Class="CalendarTest.Views.SchedulePage">
     <ContentPage.Content>
-        <xForms:SfSchedule x:Name="schedule" FirstDayOfWeek="2" ScheduleView="DayView" DataSource="{Binding AppointmentCollection}" TimeInterval="30" DayViewSettings="{Binding DayViewSettings}" ShowCurrentTimeIndicator="True">
+        <xForms:SfSchedule x:Name="schedule" FirstDayOfWeek="2" ScheduleView="DayView" DataSource="{Binding AppointmentViewModels}" TimeInterval="30" DayViewSettings="{Binding DayViewSettings}" ShowCurrentTimeIndicator="True">
             <xForms:SfSchedule.AppointmentMapping>
                 <xForms:ScheduleAppointmentMapping
                     SubjectMapping="EventName" 
