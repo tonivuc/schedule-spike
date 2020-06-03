@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using CalendarTest.Models;
@@ -27,8 +28,7 @@ namespace CalendarTest.ViewModels
             //AppointmentCollection = new ObservableCollection<Meeting>();
             //DoStuff();
             //doStuff2();
-            AppointmentCollection = ProvideMeetings();
-            //AppointmentCollection
+            AppointmentCollection = ProvideMeetingViewModels(ProvideMeetings());
             //AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
             //OnPropertyChanged(nameof(AppointmentViewModels));
         }
@@ -55,6 +55,14 @@ namespace CalendarTest.ViewModels
             m1.Color = Color.FromRgb(40, 50, 80);
             meetings.Add(m1);
             return meetings;
+        }
+
+        private ObservableCollection<MeetingViewModel> ProvideMeetingViewModels(ObservableCollection<Meeting> meetings)
+        {
+            var meetingViewModels = new ObservableCollection<MeetingViewModel>();
+            var meeting1 = new MeetingViewModel(meetings.FirstOrDefault());
+            meetingViewModels.Add(meeting1);
+            return meetingViewModels;
         }
         private List<Appointment> ProvideAppointments()
         {
@@ -90,7 +98,7 @@ namespace CalendarTest.ViewModels
         //ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();  
         
 
-        public ObservableCollection<Meeting> AppointmentCollection { get; set; }
+        public ObservableCollection<MeetingViewModel> AppointmentCollection { get; set; }
 
         //private void DoStuff()
         //{
