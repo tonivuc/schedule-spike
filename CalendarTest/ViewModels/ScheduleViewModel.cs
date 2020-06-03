@@ -24,7 +24,7 @@ namespace CalendarTest.ViewModels
         public ScheduleViewModel()
         {
             SetDayLabelFormatToMinutes();
-            AppointmentCollection = new ScheduleAppointmentCollection();
+            AppointmentCollection = new ObservableCollection<ScheduleAppointment>();
             //DoStuff();
             doStuff2();
             AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
