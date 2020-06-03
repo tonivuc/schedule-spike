@@ -24,11 +24,11 @@ namespace CalendarTest.ViewModels
         public ScheduleViewModel()
         {
             SetDayLabelFormatToMinutes();
-            DoStuff();
+            AppointmentCollection = new ScheduleAppointmentCollection();
+            //DoStuff();
+            doStuff2();
             AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
             OnPropertyChanged(nameof(AppointmentViewModels));
-            OnPropertyChanged(nameof(appointmentCollection));
-            
         }
 
         private void SetDayLabelFormatToMinutes()
@@ -72,11 +72,28 @@ namespace CalendarTest.ViewModels
         }
 
         ScheduleAppointmentCollection scheduleAppointmentCollection = new ScheduleAppointmentCollection();
-        ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();  
+        //ScheduleAppointmentCollection appointmentCollection = new ScheduleAppointmentCollection();  
+        
 
-        private void DoStuff()
-        {
+        public ObservableCollection<ScheduleAppointment> AppointmentCollection { get; set; }
+
+        //private void DoStuff()
+        //{
              
+        //    Creating new event   
+        //    ScheduleAppointment clientMeeting = new ScheduleAppointment();   
+        //    DateTime currentDate = DateTime.Now;   
+        //    DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0);    
+        //    DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+        //    clientMeeting.StartTime = startTime;   
+        //    clientMeeting.EndTime = endTime;   
+        //    clientMeeting.Color = Color.Blue;   
+        //    clientMeeting.Subject = "ClientMeeting";   
+        //    appointmentCollection.Add(clientMeeting);
+        //}
+
+        private void doStuff2()
+        {
             //Creating new event   
             ScheduleAppointment clientMeeting = new ScheduleAppointment();   
             DateTime currentDate = DateTime.Now;   
@@ -85,8 +102,24 @@ namespace CalendarTest.ViewModels
             clientMeeting.StartTime = startTime;   
             clientMeeting.EndTime = endTime;   
             clientMeeting.Color = Color.Blue;   
-            clientMeeting.Subject = "ClientMeeting";   
-            appointmentCollection.Add(clientMeeting);
+            clientMeeting.Subject = "ClientMeeting";
+            clientMeeting.Notes = "We will discuss eating porridge or pancakes for lunch";
+            clientMeeting.Location = "Room 402";
+
+            AppointmentCollection.Add(clientMeeting);
+
+            ScheduleAppointment clientMeeting2 = new ScheduleAppointment();   
+            currentDate = DateTime.Now;   
+            startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0);    
+            endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+            clientMeeting2.StartTime = startTime;   
+            clientMeeting2.EndTime = endTime;   
+            clientMeeting2.Color = Color.Red;   
+            clientMeeting2.Subject = "Othermeeting";
+            clientMeeting2.Notes = "We will discuss eating porridge or pancakes for lunch";
+            clientMeeting2.Location = "Room 402";
+
+            AppointmentCollection.Add(clientMeeting2);
         }
 
     }
