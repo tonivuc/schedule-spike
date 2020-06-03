@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Text;
 using CalendarTest.Models;
 using Syncfusion.SfSchedule.XForms;
+using Xamarin.Forms;
 using Random = System.Random;
 
 namespace CalendarTest.ViewModels
@@ -28,6 +28,7 @@ namespace CalendarTest.ViewModels
             //DoStuff();
             //doStuff2();
             AppointmentCollection = ProvideMeetings();
+            //AppointmentCollection
             //AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
             //OnPropertyChanged(nameof(AppointmentViewModels));
         }
@@ -50,8 +51,8 @@ namespace CalendarTest.ViewModels
             Meeting m1 = new Meeting();
             m1.EventName = "Superevent";
             m1.From = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0); 
-            m1.To = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);  
-            m1.Color = Xamarin.Forms.Color.Blue;
+            m1.To = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);
+            m1.Color = Color.FromRgb(40, 50, 80);
             meetings.Add(m1);
             return meetings;
         }
@@ -82,7 +83,7 @@ namespace CalendarTest.ViewModels
         private Color GetRandomColor()
         {
             var rnd = new Random();
-            return Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            return new Color(10,24,60);//System.Drawing.Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
         }
 
         ScheduleAppointmentCollection scheduleAppointmentCollection = new ScheduleAppointmentCollection();

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Text;
 using CalendarTest.Annotations;
 using CalendarTest.Models;
+using Xamarin.Forms;
 
 namespace CalendarTest.ViewModels
 {
