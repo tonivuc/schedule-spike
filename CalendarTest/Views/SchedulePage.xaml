@@ -5,27 +5,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xForms="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
              xmlns:viewModels="clr-namespace:CalendarTest.ViewModels;assembly=CalendarTest"
+             xmlns:views="clr-namespace:CalendarTest.Views;assembly=CalendarTest"
              mc:Ignorable="d"
-             x:Class="CalendarTest.Views.SchedulePage">
+             x:Class="CalendarTest.Views.SchedulePage"
+             x:Name="contentPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="appointmentTemplate">
-                <ViewCell>
-                    <ContentView>
-
-                    </ContentView>
-                </ViewCell>
-            </DataTemplate>
+            <views:MyAppointmentDataTemplate x:Key="MyAppointmentDataTemplate">
+                <views:MyAppointmentDataTemplate.AppointmentTemplate> 
+                    <DataTemplate>
+                        <Label Text="Cake is lie"></Label>
+                    </DataTemplate>
+                </views:MyAppointmentDataTemplate.AppointmentTemplate>
+            </views:MyAppointmentDataTemplate>
         </ResourceDictionary>
 
     </ContentPage.Resources>
     <ContentPage.Content>
-        <xForms:SfSchedule FirstDayOfWeek="2" 
+        <!-- The DataSource comes from a different place than the DataTemplate used by the rest of the SfSchedule -->
+        <xForms:SfSchedule x:Name="SfSchedule" 
+                           FirstDayOfWeek="2" 
                            ScheduleView="DayView" 
-                           DataSource="{Binding AppointmentViewModels}" 
+                           DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.AppointmentViewModels}"
                            TimeInterval="30" 
-                           DayViewSettings="{Binding DayViewSettings}" 
-                           ShowCurrentTimeIndicator="True">
+                           ShowCurrentTimeIndicator="True"
+                           AppointmentTemplate="{Binding AppointmentTemplate}">
+            <xForms:SfSchedule.BindingContext>
+                <views:MyAppointmentDataTemplate>
+                    <views:MyAppointmentDataTemplate.AppointmentTemplate> 
+                        <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
+                            <!-- Content for each appointment-->
+                            <Button Text="{Binding EventName}">
+                                <Button.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped">
+
+                                    </TapGestureRecognizer>
+                                </Button.GestureRecognizers>
+                            </Button>
+                        </DataTemplate>
+                    </views:MyAppointmentDataTemplate.AppointmentTemplate>
+                </views:MyAppointmentDataTemplate>
+            </xForms:SfSchedule.BindingContext>
             <xForms:SfSchedule.AppointmentMapping>
                 <xForms:ScheduleAppointmentMapping
                     SubjectMapping="EventName" 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,12 @@ namespace CalendarTest.Views
         public SchedulePage()
         {
             InitializeComponent();
+            SfSchedule.Locale = CultureInfo.CurrentCulture.ThreeLetterISOLanguageName;
+        }
+
+        private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage.DisplayAlert("Alert", "Alert alert code red!","No worries!");
         }
     }
 }
