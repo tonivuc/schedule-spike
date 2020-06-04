@@ -25,6 +25,15 @@ namespace CalendarTest.ViewModels
         public ScheduleViewModel()
         {
             AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
+            AddRange(AppointmentViewModels,ProvideTimeSlots());
+        }
+
+        private void AddRange(ObservableCollection<AppointmentViewModel> originalList, ObservableCollection<AppointmentViewModel> listToAppend)
+        {
+            foreach (var item in listToAppend)
+            {
+                originalList.Add(item);
+            }
         }
 
         private List<Appointment> ProvideAppointments()
@@ -36,6 +45,20 @@ namespace CalendarTest.ViewModels
 
             appointments.Add(new Appointment("Chris MacArthur Diddlebaum", startTime, endTime));
             appointments.Add(new Appointment("Timmothy Garfield", startTime, endTime));
+            return appointments;
+        }
+
+        private List<Appointment> ProvideTimeSlots()
+        {
+            var appointments = new List<Appointment>();
+            DateTime currentDate = DateTime.Now;   
+            DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 9, 0, 0);    
+            DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+            DateTime startTime2 = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 12, 0, 0);    
+            DateTime endTime2 = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 30, 0);   
+
+            appointments.Add(new Appointment("Poliklinikk", startTime, endTime));
+            appointments.Add(new Appointment("Lunsj", startTime2, endTime2));
             return appointments;
         }
 
