@@ -25,7 +25,7 @@ namespace CalendarTest.ViewModels
         public ScheduleViewModel()
         {
             AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
-            AddRange(AppointmentViewModels,ProvideTimeSlots());
+            AddRange(AppointmentViewModels,ProvideTimeSlotViewModels(ProvideTimeSlots()));
         }
 
         private void AddRange(ObservableCollection<AppointmentViewModel> originalList, ObservableCollection<AppointmentViewModel> listToAppend)
@@ -60,6 +60,23 @@ namespace CalendarTest.ViewModels
             appointments.Add(new Appointment("Poliklinikk", startTime, endTime));
             appointments.Add(new Appointment("Lunsj", startTime2, endTime2));
             return appointments;
+        }
+
+        private ObservableCollection<AppointmentViewModel> ProvideTimeSlotViewModels(List<Appointment> appointments)
+        {
+            var appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
+            if (appointments == null) return appointmentViewModels;
+
+            if (appointments[0] != null)
+            {
+                appointmentViewModels.Add(new AppointmentViewModel(appointments[0]) { Color = Color.CornflowerBlue});
+            }
+            if (appointments[1] != null)
+            {
+                appointmentViewModels.Add(new AppointmentViewModel(appointments[1]) { Color = Color.LightGray});
+            }
+
+            return appointmentViewModels;
         }
 
         private ObservableCollection<AppointmentViewModel> ProvideAppointmentViewModels(List<Appointment> appointments)

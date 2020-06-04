@@ -21,23 +21,15 @@
                            DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.AppointmentViewModels}"
                            TimeInterval="30" 
                            ShowCurrentTimeIndicator="True"
-                           AppointmentTemplate="{Binding AppointmentTemplate}"> <!-- Remove this line and the colors will work. But Clicked event won't -->
+                           AppointmentTemplate="{Binding AppointmentTemplate}">
+             <!-- Remove this line and the colors will work. But Clicked event won't -->
             <xForms:SfSchedule.BindingContext>
                 <views:MyAppointmentDataTemplate>
                     <views:MyAppointmentDataTemplate.AppointmentTemplate> 
                         <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
                             <!-- Content for each appointment-->
-                            <Grid BackgroundColor="{Binding Color}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="1*" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="{Binding EventName}"></Label>
-                                <Button Grid.Row="1" Text="{Binding EventName}"
-
-                                        Clicked="Button_OnClicked">
-                                </Button>
-                            </Grid>
+                            <Label Text="Test" BackgroundColor="{Binding Color}" HorizontalOptions="Start"></Label>
+                            
                         </DataTemplate>
                     </views:MyAppointmentDataTemplate.AppointmentTemplate>
                 </views:MyAppointmentDataTemplate>
@@ -53,7 +45,7 @@
             <xForms:SfSchedule.DayViewSettings>
                 <xForms:DayViewSettings>
                     <xForms:DayViewSettings.DayLabelSettings>
-                        <xForms:DayLabelSettings TimeFormat="hh:mm"/>
+                        <xForms:DayLabelSettings TimeFormat="hh:mm" />
                     </xForms:DayViewSettings.DayLabelSettings>
                 </xForms:DayViewSettings>
             </xForms:SfSchedule.DayViewSettings>
