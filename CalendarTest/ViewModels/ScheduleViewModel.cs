@@ -20,22 +20,11 @@ namespace CalendarTest.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public DayViewSettings DayViewSettings { get; set; }
-
         public ObservableCollection<AppointmentViewModel> AppointmentViewModels { get; set; }
 
         public ScheduleViewModel()
         {
-            SetDayLabelFormatToMinutes();
             AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
-        }
-
-        private void SetDayLabelFormatToMinutes()
-        {
-            DayViewSettings = new DayViewSettings();
-            DayLabelSettings dayLabelSettings = new DayLabelSettings();
-            dayLabelSettings.TimeFormat = "hh mm";
-            DayViewSettings.DayLabelSettings = dayLabelSettings;
         }
 
         private List<Appointment> ProvideAppointments()
@@ -65,7 +54,7 @@ namespace CalendarTest.ViewModels
         private Color GetRandomColor()
         {
             var rnd = new Random();
-            return Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));//System.Drawing.Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+            return Color.FromRgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
         }
     }
 }

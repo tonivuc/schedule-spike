@@ -14,7 +14,7 @@
         <viewModels:ScheduleViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <!-- The DataSource comes from a different place than the DataTemplate used by the rest of the SfSchedule -->
+        <!-- DataSource is set to the BindingContext of the page, since the SfSchedule is bound to a DataTemplate -->
         <xForms:SfSchedule x:Name="SfSchedule" 
                            FirstDayOfWeek="2" 
                            ScheduleView="DayView" 
@@ -35,12 +35,21 @@
                     </views:MyAppointmentDataTemplate.AppointmentTemplate>
                 </views:MyAppointmentDataTemplate>
             </xForms:SfSchedule.BindingContext>
+            <!-- Required for the template to work -->
             <xForms:SfSchedule.AppointmentMapping>
                 <xForms:ScheduleAppointmentMapping
                     StartTimeMapping="From"
                     EndTimeMapping="To">
                 </xForms:ScheduleAppointmentMapping>
             </xForms:SfSchedule.AppointmentMapping>
+            <!-- Setting time format -->
+            <xForms:SfSchedule.DayViewSettings>
+                <xForms:DayViewSettings>
+                    <xForms:DayViewSettings.DayLabelSettings>
+                        <xForms:DayLabelSettings TimeFormat="hh:mm"/>
+                    </xForms:DayViewSettings.DayLabelSettings>
+                </xForms:DayViewSettings>
+            </xForms:SfSchedule.DayViewSettings>
         </xForms:SfSchedule>
     </ContentPage.Content>
 </ContentPage>
