@@ -14,49 +14,107 @@
         <viewModels:ScheduleViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <!-- DataSource is set to the BindingContext of the page, since the SfSchedule is bound to a DataTemplate -->
-        <xForms:SfSchedule x:Name="SfSchedule" 
-                           FirstDayOfWeek="2" 
-                           ScheduleView="DayView" 
-                           DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.AppointmentViewModels}"
-                           TimeInterval="30" 
-                           ShowCurrentTimeIndicator="True"
-                           AppointmentTemplate="{Binding AppointmentTemplate}"> <!-- Remove this line and the colors will work. But Clicked event won't -->
-            <xForms:SfSchedule.BindingContext>
-                <views:MyAppointmentDataTemplate>
-                    <views:MyAppointmentDataTemplate.AppointmentTemplate> 
-                        <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
-                            <!-- Content for each appointment-->
-                            <Grid BackgroundColor="{Binding Color}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="1*" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="{Binding EventName}"></Label>
-                                <Button Grid.Row="1" Text="{Binding EventName}"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Text="04.06.2020" FontSize="20" Grid.Column="0" Margin="16,10,10,10"></Label>
+            <xForms:SfSchedule  Grid.Column="0" Grid.Row="1" x:Name="SfSchedule" 
+                               FirstDayOfWeek="2" 
+                               ScheduleView="DayView" 
+                               DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.TimeSlotViewModels}"
+                               TimeInterval="30" 
+                               ShowCurrentTimeIndicator="True"
+                               AppointmentTemplate="{Binding AppointmentTemplate}"
+                               ViewHeaderHeight="0"
+                               HeaderHeight="0"
+                               EnableNavigation="False"> <!-- Remove this line and the colors will work. But Clicked event won't -->
+                <xForms:SfSchedule.BindingContext>
+                    <views:MyAppointmentDataTemplate>
+                        <views:MyAppointmentDataTemplate.AppointmentTemplate> 
+                            <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}" >
+                                <!-- Content for each appointment-->
+                                <Grid BackgroundColor="{Binding Color}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*" />
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="{Binding EventName}"></Label>
 
-                                        Clicked="Button_OnClicked">
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </views:MyAppointmentDataTemplate.AppointmentTemplate>
-                </views:MyAppointmentDataTemplate>
-            </xForms:SfSchedule.BindingContext>
-            <!-- Required for the template to work -->
-            <xForms:SfSchedule.AppointmentMapping>
-                <xForms:ScheduleAppointmentMapping
-                    StartTimeMapping="From"
-                    EndTimeMapping="To">
-                </xForms:ScheduleAppointmentMapping>
-            </xForms:SfSchedule.AppointmentMapping>
-            <!-- Setting time format -->
-            <xForms:SfSchedule.DayViewSettings>
-                <xForms:DayViewSettings>
-                    <xForms:DayViewSettings.DayLabelSettings>
-                        <xForms:DayLabelSettings TimeFormat="hh:mm"/>
-                    </xForms:DayViewSettings.DayLabelSettings>
-                </xForms:DayViewSettings>
-            </xForms:SfSchedule.DayViewSettings>
-        </xForms:SfSchedule>
+                                </Grid>
+                            </DataTemplate>
+                        </views:MyAppointmentDataTemplate.AppointmentTemplate>
+                    </views:MyAppointmentDataTemplate>
+                </xForms:SfSchedule.BindingContext>
+                <!-- Required for the template to work -->
+                <xForms:SfSchedule.AppointmentMapping>
+                    <xForms:ScheduleAppointmentMapping
+                        StartTimeMapping="From"
+                        EndTimeMapping="To">
+                    </xForms:ScheduleAppointmentMapping>
+                </xForms:SfSchedule.AppointmentMapping>
+                <!-- Setting time format -->
+                <xForms:SfSchedule.DayViewSettings>
+                    <xForms:DayViewSettings TimeRulerSize="200">
+                        <xForms:DayViewSettings.DayLabelSettings>
+                            <xForms:DayLabelSettings TimeFormat="hh:mm"/>
+                        </xForms:DayViewSettings.DayLabelSettings>
+                    </xForms:DayViewSettings>
+                </xForms:SfSchedule.DayViewSettings>
+            </xForms:SfSchedule>
+                        <xForms:SfSchedule  Grid.Column="1"
+                                            Grid.Row="1"
+                                            x:Name="SfSchedule2" 
+                                            FirstDayOfWeek="2" 
+                                            ScheduleView="DayView" 
+                                            DataSource="{Binding Source={x:Reference contentPage}, Path=BindingContext.AppointmentViewModels}"
+                                            TimeInterval="30" 
+                                            ViewHeaderHeight="0"
+                                            HeaderHeight="0"
+                                            AppointmentTemplate="{Binding AppointmentTemplate}"> <!-- Remove this line and the colors will work. But Clicked event won't -->
+                <xForms:SfSchedule.BindingContext>
+                    <views:MyAppointmentDataTemplate>
+                        <views:MyAppointmentDataTemplate.AppointmentTemplate> 
+                            <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}" >
+                                <!-- Content for each appointment-->
+                                <Grid BackgroundColor="{Binding Color}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Button Grid.Row="0" 
+                                            Text="{Binding EventName}"
+                                            Clicked="Button_OnClicked"
+                                            HeightRequest="80">
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </views:MyAppointmentDataTemplate.AppointmentTemplate>
+                    </views:MyAppointmentDataTemplate>
+                </xForms:SfSchedule.BindingContext>
+                <!-- Required for the template to work -->
+                <xForms:SfSchedule.AppointmentMapping>
+                    <xForms:ScheduleAppointmentMapping
+                        StartTimeMapping="From"
+                        EndTimeMapping="To">
+                    </xForms:ScheduleAppointmentMapping>
+                </xForms:SfSchedule.AppointmentMapping>
+                <!-- Setting time format -->
+                <xForms:SfSchedule.DayViewSettings>
+                    <xForms:DayViewSettings TimeRulerSize="0" >
+                        <xForms:DayViewSettings.DayLabelSettings>
+                            <xForms:DayLabelSettings TimeFormat="hh:mm"/>
+                        </xForms:DayViewSettings.DayLabelSettings>
+                    </xForms:DayViewSettings>
+                </xForms:SfSchedule.DayViewSettings>
+            </xForms:SfSchedule>
+        </Grid>
+        <!-- DataSource is set to the BindingContext of the page, since the SfSchedule is bound to a DataTemplate -->
+        
     </ContentPage.Content>
 </ContentPage>
