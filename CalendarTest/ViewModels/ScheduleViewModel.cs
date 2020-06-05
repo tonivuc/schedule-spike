@@ -24,8 +24,11 @@ namespace CalendarTest.ViewModels
 
         public ScheduleViewModel()
         {
-            AppointmentViewModels = ProvideAppointmentViewModels(ProvideAppointments());
+            AppointmentViewModels = new ObservableCollection<AppointmentViewModel>();
+            AddRange(AppointmentViewModels,ProvideEmptyTimeSlotViewModels(ProvideEmptyTimeSlots()));
+            AddRange(AppointmentViewModels, ProvideAppointmentViewModels(ProvideAppointments()));
             AddRange(AppointmentViewModels,ProvideTimeSlotViewModels(ProvideTimeSlots()));
+
         }
 
         private void AddRange(ObservableCollection<AppointmentViewModel> originalList, ObservableCollection<AppointmentViewModel> listToAppend)
@@ -40,24 +43,40 @@ namespace CalendarTest.ViewModels
         {
             var appointments = new List<Appointment>();
             DateTime currentDate = DateTime.Now;   
-            DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0);    
-            DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+            DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 9, 0, 0);    
+            DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 10, 0, 0);
+            DateTime startTime2 = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0);    
+            DateTime endTime2 = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);
 
             appointments.Add(new Appointment("Chris MacArthur Diddlebaum", startTime, endTime));
-            appointments.Add(new Appointment("Timmothy Garfield", startTime, endTime));
+            appointments.Add(new Appointment("Timmothy Garfield", startTime2, endTime2));
+            return appointments;
+        }
+
+        private List<Appointment> ProvideEmptyTimeSlots()
+        {
+            var appointments = new List<Appointment>();
+            DateTime currentDate = DateTime.Now;   
+            DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 10, 0, 0);    
+            DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+            DateTime startTime2 = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 12, 30, 0);    
+            DateTime endTime2 = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 16, 0, 0);
+            DateTime startTime3 = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 9, 00, 0);    
+            DateTime endTime3 = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 10, 0, 0);
+            
+            appointments.Add(new Appointment("Ittjno", startTime, endTime));
+            appointments.Add(new Appointment("Ittjno", startTime2, endTime2));
+            appointments.Add(new Appointment("Ittjno", startTime3, endTime3));
             return appointments;
         }
 
         private List<Appointment> ProvideTimeSlots()
         {
             var appointments = new List<Appointment>();
-            DateTime currentDate = DateTime.Now;   
-            DateTime startTime = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 9, 0, 0);    
-            DateTime endTime = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 0, 0);   
+            DateTime currentDate = DateTime.Now;
             DateTime startTime2 = new DateTime (currentDate.Year,currentDate.Month,currentDate.Day, 12, 0, 0);    
             DateTime endTime2 = new DateTime (currentDate.Year, currentDate.Month,currentDate.Day, 12, 30, 0);   
 
-            appointments.Add(new Appointment("Poliklinikk", startTime, endTime));
             appointments.Add(new Appointment("Lunsj", startTime2, endTime2));
             return appointments;
         }
@@ -69,11 +88,7 @@ namespace CalendarTest.ViewModels
 
             if (appointments[0] != null)
             {
-                appointmentViewModels.Add(new AppointmentViewModel(appointments[0]) { Color = Color.CornflowerBlue});
-            }
-            if (appointments[1] != null)
-            {
-                appointmentViewModels.Add(new AppointmentViewModel(appointments[1]) { Color = Color.LightGray});
+                appointmentViewModels.Add(new AppointmentViewModel(appointments[0]) { Color = Color.LightGray});
             }
 
             return appointmentViewModels;
@@ -86,6 +101,18 @@ namespace CalendarTest.ViewModels
 
             foreach (var appointment in appointments) {
                 appointmentViewModels.Add(new AppointmentViewModel(appointment) { Color = GetRandomColor()});
+            }
+
+            return appointmentViewModels;
+        }
+
+        private ObservableCollection<AppointmentViewModel> ProvideEmptyTimeSlotViewModels(List<Appointment> appointments)
+        {
+            var appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
+
+
+            foreach (var appointment in appointments) {
+                appointmentViewModels.Add(new AppointmentViewModel(appointment) { Color = Color.Transparent});
             }
 
             return appointmentViewModels;

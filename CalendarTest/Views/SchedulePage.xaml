@@ -28,7 +28,7 @@
                     <views:MyAppointmentDataTemplate.AppointmentTemplate> 
                         <DataTemplate x:DataType="{x:Type viewModels:AppointmentViewModel}">
                             <!-- Content for each appointment-->
-                            <Label Text="Test" BackgroundColor="{Binding Color}" HorizontalOptions="Start"></Label>
+                            <Label Text="{Binding EventName}" BackgroundColor="{Binding Color}" HorizontalOptions="Start"></Label>
                             
                         </DataTemplate>
                     </views:MyAppointmentDataTemplate.AppointmentTemplate>
