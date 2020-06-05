@@ -44,7 +44,13 @@
                                         <RowDefinition Height="2*" />
                                         <RowDefinition Height="1*" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Text="{Binding EventName}"></Label>
+                                    <Label Grid.Row="0" Text="{Binding EventName}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped">
+
+                                            </TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
 
                                 </Grid>
                             </DataTemplate>
